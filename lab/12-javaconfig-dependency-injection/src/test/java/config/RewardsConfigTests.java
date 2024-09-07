@@ -37,7 +37,7 @@ public class RewardsConfigTests {
 	private RewardsConfig rewardsConfig = new RewardsConfig(dataSource);
 
 	@Test
-	public void getBeans() {
+	public void getBeans() {  // Test passed
 		RewardNetwork rewardNetwork = rewardsConfig.rewardNetwork();
 		assertTrue(rewardNetwork instanceof RewardNetworkImpl); // assertInstanceOf(RewardNetworkImpl.class, rewardNetwork);
 
