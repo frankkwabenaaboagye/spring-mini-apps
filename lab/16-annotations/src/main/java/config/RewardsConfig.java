@@ -26,35 +26,35 @@ import javax.sql.DataSource;
 @ComponentScan("rewards.internal") // all the classes we annotated are found in this particular package
 public class RewardsConfig {
 
-	DataSource dataSource;
-
-	public RewardsConfig(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+//	DataSource dataSource;
+//
+//	public RewardsConfig(DataSource dataSource) {
+//		this.dataSource = dataSource;
+//	}
 		
-	public RewardNetwork rewardNetwork(){
-		return new RewardNetworkImpl(
-			accountRepository(), 
-			restaurantRepository(), 
-			rewardRepository());
-	}
+//	public RewardNetwork rewardNetwork(){
+//		return new RewardNetworkImpl(
+//			accountRepository(),
+//			restaurantRepository(),
+//			rewardRepository());
+//	}
 	
-	public AccountRepository accountRepository(){
-		JdbcAccountRepository repository = new JdbcAccountRepository();
-		repository.setDataSource(dataSource);
-		return repository;
-	}
+//	public AccountRepository accountRepository(){
+//		JdbcAccountRepository repository = new JdbcAccountRepository();
+//		repository.setDataSource(dataSource);
+//		return repository;
+//	}
 	
-	public RestaurantRepository restaurantRepository(){
-		JdbcRestaurantRepository repository = new JdbcRestaurantRepository(dataSource);
-		return repository;
-	}
+//	public RestaurantRepository restaurantRepository(){
+//		JdbcRestaurantRepository repository = new JdbcRestaurantRepository(dataSource);
+//		return repository;
+//	}
 	
-	public RewardRepository rewardRepository(){
-		JdbcRewardRepository repository = new JdbcRewardRepository();
-		repository.setDataSource(dataSource);
-		return repository;
-	}
+//	public RewardRepository rewardRepository(){
+//		JdbcRewardRepository repository = new JdbcRewardRepository();
+//		repository.setDataSource(dataSource);
+//		return repository;
+//	}
 	
 	// TODO-02: Remove all of the @Bean methods above.
 	// - Remove the code that autowires DataSource as well.
