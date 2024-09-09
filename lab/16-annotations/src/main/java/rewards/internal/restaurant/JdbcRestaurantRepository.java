@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,7 +64,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 	 * Restaurant cache is populated for read only access
 	 */
 
-	@Autowired  // we put it here instead of the setter --> I think to fail fast -> because it call the populateRestaurantCache and in there, we need the datasource to get a connection -> so it seems right we do that
+	// @Autowired  // we put it here instead of the setter --> I think to fail fast -> because it call the populateRestaurantCache and in there, we need the datasource to get a connection -> so it seems right we do that
 	public JdbcRestaurantRepository(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.populateRestaurantCache();
@@ -72,6 +73,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 	public JdbcRestaurantRepository() {
 	}
 
+	@Autowired  // if the autowired is here, then the populate cache needs to be annotated with the @PostConstruct ->  to cause Spring to call this method during the initialization phase of the lifecyle.
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
@@ -96,6 +98,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 	 *   the constructor, is a better practice.
 	 */
 
+	@PostConstruct  // It is arguable that populateRestaurantCache should never have been in the constructor, since it goes beyond constructing the object to running application code. Using @PostConstruct is a better approach.
 	void populateRestaurantCache() {
 		restaurantCache = new HashMap<String, Restaurant>();
 		String sql = "select MERCHANT_NUMBER, NAME, BENEFIT_PERCENTAGE from T_RESTAURANT";
