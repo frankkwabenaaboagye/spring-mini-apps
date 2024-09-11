@@ -10,4 +10,5 @@ To import into your IDE, import the parent pom `lab/pom.xml` as Maven projects o
 - We want to avoid code tangling and eliminate code scattering
 - So there is a need to modularize.
 - AOP helps to do that
+- AOP Technologies - AspectJ, Spring AOP
 
