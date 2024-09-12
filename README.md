@@ -50,3 +50,33 @@ execution( <pattern 1> ) && execution( <pattern 2> )
         // MethodName with Arguments
     
 ```
+
+- Advice Types
+    - `Before` ⏩
+        - Proxy delegates to the advice before delegating to the target⚙️
+        - do whatever you want in the advice before executing the business logic
+        - if you happen to put an exception on the advice, you prevent the target from executing
+            - good for security🔒 use cases 
+    - `AfterReturning` ↩️
+        - Proxy first delegates to the target⚙️
+        - then the proxy delegates to the advice
+            - This only happens when there is a successful return from the target
+            - there will be more information here because, you will  have
+                - the context information
+                - with the return from the target
+    - `AfterThrowing` ⚠️
+        - Proxy first delegate to the target⚙️
+        - then the proxy delegates to the advice
+            - This only happens when there is an exception thrown from the target
+            - you will have the exception available to you
+            - you can throw another exception or allow it to propagate
+                - there is a work around this
+    - `After` 🔚
+        - Proxy delegate to the target⚙️
+        - then proxy delegate to the advice
+        - whether there is a success reutrn or exception, it does not matter
+        - advice is excuted after the target⚙️
+    - `Around` 🔄
+        - Proxy delegates to the advice
+        - it is your responsibility to call `proceed` method to the target⚙️
+        - in this way, you can excute things before and after the target - cool! 😎
