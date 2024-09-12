@@ -32,4 +32,21 @@ TODO
     - `Aspect` : Module that encapsulated `Pointcuts` &  `Advice`
     - `Weaving` : Combining `Aspects` with main code
 - Defining a pointcut
-    - 
+    - Spring AOP uses AspectJ expression language for selecting where to apply advice
+    - When defining pointcut, we're defining designators
+    - Designators - `execution`, e.t.c
+
+```java
+// format
+execution( <method pattern> )
+
+// chain together with &&, ||, !
+execution( <pattern 1> ) && execution( <pattern 2> )
+
+// method pattern
+[modifiers] ReturnType [ClassType] MethodName(Arguments) [throws ExceptionType]
+    // two mandatory things: 
+        // ReturnType and 
+        // MethodName with Arguments
+    
+```
