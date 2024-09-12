@@ -4,7 +4,8 @@ To import into your IDE, import the parent pom `lab/pom.xml` as Maven projects o
 
 
 # Note
- Some Tips
+ Some Tips 
+ - credit: spring docs, spring academy
 
 ## AOP
 - There are some generic functionalities that are needed in many places in any application code
@@ -12,4 +13,9 @@ To import into your IDE, import the parent pom `lab/pom.xml` as Maven projects o
 - what can we do? Modularize? Yes!
 - AOP helps to do that
 - AOP Technologies - AspectJ, Spring AOP
-
+- Core concepts
+    - `Join Point`: A point in the execution of a program - Method calls  or exception
+    - `Pointcut` : Expression that selects one or more `join point`
+    - `Advice` : Code to be executed at each selected `join point`
+    - `Aspect` : Module that encapsulated `Pointcuts` &  `Advice`
+    - `Weaving` : Combining `Aspects` with main code
