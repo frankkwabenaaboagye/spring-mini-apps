@@ -80,3 +80,8 @@ execution( <pattern 1> ) && execution( <pattern 2> )
         - Proxy delegates to the advice
         - it is your responsibility to call `proceed` method to the target⚙️
         - in this way, you can excute things before and after the target - cool! 😎
+- Limitations of spring aop
+    - can only advise non-private methods
+    - can only advise spring beans
+    - inner method call inside of a target would not get advised
+- Note: AspectJ does not have this limitations
