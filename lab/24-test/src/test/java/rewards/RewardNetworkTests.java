@@ -1,9 +1,11 @@
 package rewards;
 
 import common.money.MonetaryAmount;
+import config.RewardsConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
@@ -158,7 +160,24 @@ public class RewardNetworkTests {
 	}
 
 
+//	@Configuration
+//	@Import(TestInfrastructureConfig.class)
+//	static class TestThisConfiguration {}
+
 	@Configuration
-	@Import(TestInfrastructureConfig.class)
-	static class TestThisConfiguration {}
+	@Import({
+			TestInfrastructureLocalConfig.class,
+			TestInfrastructureJndiConfig.class,
+			RewardsConfig.class })
+	static class TestInfrastructureConfig {
+
+		/**
+		 * The bean logging post-processor from the bean lifecycle slides.
+		 */
+		@Bean
+		public static LoggingBeanPostProcessor loggingBean(){
+			return new LoggingBeanPostProcessor();
+		}
+	}
+
 }
