@@ -164,6 +164,8 @@ public class RewardNetworkTests {
 //	@Import(TestInfrastructureConfig.class)
 //	static class TestThisConfiguration {}
 
+	// or
+
 	@Configuration
 	@Import({
 			TestInfrastructureLocalConfig.class,
