@@ -4,6 +4,7 @@ import common.money.MonetaryAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -82,6 +83,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 @SpringJUnitConfig(classes = {TestInfrastructureConfig.class})
+@ActiveProfiles({"stub"})
 public class RewardNetworkTests {
 
 	
