@@ -4,6 +4,8 @@ import common.money.MonetaryAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
@@ -77,12 +79,12 @@ import static org.junit.jupiter.api.Assertions.*;
 /* TODO-08 (Optional): Create an inner static class from TestInfrastructureConfig
  * - Once inner static class is created, remove configuration
  *   class reference to TestInfrastructureConfig class from the annotation
- *   you added to this class in TO DO-01 above. (For more detailed on, refer tp
+ *   you added to this class in TO DO-01 above. (For more detailed on, refer to
  *   lab document.)
  * - Run the test again.
  */
 
-@SpringJUnitConfig(classes = {TestInfrastructureConfig.class})
+@SpringJUnitConfig
 @ActiveProfiles({"jdbc", "local"})
 public class RewardNetworkTests {
 
@@ -154,4 +156,9 @@ public class RewardNetworkTests {
 				() -> assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Annabelle").getAmount()),
 				() -> assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Corgan").getAmount()));
 	}
+
+
+	@Configuration
+	@Import(TestInfrastructureConfig.class)
+	static class TestThisConfiguration {}
 }
