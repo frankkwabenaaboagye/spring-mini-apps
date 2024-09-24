@@ -85,3 +85,17 @@ execution( <pattern 1> ) && execution( <pattern 2> )
     - can only advise spring beans
     - inner method call inside of a target would not get advised
 - Note: AspectJ does not have this limitations
+
+## JDBC
+- There are issues with plain Jdbc
+    - boilerplate code
+    - forced to catch certain exceptions
+    - forced to close resources
+- Spring JDBC Template solves these issues
+    - we a simple statment, spring will be able to handle for us
+        - connection
+        - statement execution
+        - result set processsing
+        - exceptions
+        - release of connection
+        
