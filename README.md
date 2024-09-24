@@ -98,4 +98,5 @@ execution( <pattern 1> ) && execution( <pattern 2> )
         - result set processsing
         - exceptions
         - release of connection
-        
+- Note: When creating the Jdbc, we need a datasource
+
