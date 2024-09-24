@@ -161,15 +161,26 @@ jdbcTemplate
 
 
     // examples
-    String sql = "select first_name, last_name from PERSON where id=?";
+        // single row
+            String sql = "select first_name, last_name from PERSON where id=?";
 
-        // here we define row mapper using lambda
-    jdbc.queryForObject(
-        sql, 
-        (rs, rowNum)-> new Person(rs.getString("first_name"), rs.getString("last_name")), 
-        id
-    )
-        // the above returns `Person` domain object
+                // here we define row mapper using lambda
+            jdbc.queryForObject(
+                sql, 
+                (rs, rowNum)-> new Person(rs.getString("first_name"), rs.getString("last_name")), 
+                id
+            );
+                // the above returns `Person` domain object
+
+        // multiple rows
+            String sql = "select first_name, last_name from PERSON";
+
+                // here we define row mapper using lambda also
+            jdbc.queryForObject(
+                sql, 
+                (rs, rowNum)-> new Person(rs.getString("first_name"), rs.getString("last_name"))
+            );
+                // the above returns `List<Person>` domain object
 
 
 
