@@ -107,4 +107,72 @@ execution( <pattern 1> ) && execution( <pattern 2> )
         - exceptions
         - release of connection
 - Note: When creating the Jdbc, we need a datasource
+- Basic Usage
+    - For simple Types
+    - For Generic Maps
+    - For Domain Objects
+
+```java
+// for simple types
+
+jdbcTemplate.queryForObject(the_sql, the_return_class); 
+
+String sql = "select count(*) from PERSON";
+jdbcTemplate.queryForObject(sql, Long.class); 
+
+    // you can bind variables too
+    String sql = "insert into PERSON(first_name, last_name) values(?, ?)";
+    jdbcTemplate.update(sql, "Kay", "Lee");
+        /* Note: Use the `update` method
+             to perfom - insert, update, delete
+        */
+
+// for generic maps
+    // can return each row of a ResultSet as a map
+jdbcTemplate.queryForList(...);
+jdbcTemplate.queryForMap(...);   // watch out for memory consumption
+
+    // example
+    String sql = "select * from PERSON where id=?";
+    int id = 1;
+    jdbcTemplate.queryForMap(sql, id);  // this returns: Map<String, Object>
+
+    String sql = "select * from PERSON";
+    jdbcTemplate.queryForList(sql); // returns: List<Map<String, Object>>
+
+
+// Domain Object queries
+    // you have to use call back approach
+        - RowMapper
+        - ResultSetExtractor
+        - 
+
+
+jdbcTemplate
+.queryForObject(
+    String sql, 
+    RowMapper<T> rowMapper, 
+    Object... args
+)
+.queryForObject(
+    String sql, 
+    RowMapper<T> rowMapper
+)
+
+
+    // examples
+    String sql = "select first_name, last_name from PERSON where id=?";
+
+        // here we define row mapper using lambda
+    jdbc.queryForObject(
+        sql, 
+        (rs, rowNum)-> new Person(rs.getString("first_name"), rs.getString("last_name")), 
+        id
+    )
+        // the above returns `Person` domain object
+
+
+
+
+```
 
