@@ -3,6 +3,7 @@ package rewards.internal.account;
 import common.money.MonetaryAmount;
 import common.money.Percentage;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -28,9 +29,11 @@ import java.sql.SQLException;
 public class JdbcAccountRepository implements AccountRepository {
 
 	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplate;
 
 	public JdbcAccountRepository(DataSource dataSource) {
 		this.dataSource = dataSource;
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	// TODO-07 (Optional): Refactor this method using JdbcTemplate and ResultSetExtractor
@@ -92,8 +95,16 @@ public class JdbcAccountRepository implements AccountRepository {
 	// - Rerun the JdbcAccountRepositoryTests and verify it passes
 	public void updateBeneficiaries(Account account) {
 		String sql = "update T_ACCOUNT_BENEFICIARY SET SAVINGS = ? where ACCOUNT_ID = ? and NAME = ?";
+
+
+		for (Beneficiary beneficiary : account.getBeneficiaries()) {
+			jdbcTemplate.update(sql, beneficiary.getSavings().asBigDecimal(), account.getEntityId(), beneficiary.getName());
+		}
+
+		/*
 		Connection conn = null;
 		PreparedStatement ps = null;
+
 		try {
 			conn = dataSource.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -121,6 +132,7 @@ public class JdbcAccountRepository implements AccountRepository {
 				}
 			}
 		}
+		*/
 	}
 
 	/**
