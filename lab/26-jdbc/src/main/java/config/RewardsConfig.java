@@ -43,7 +43,7 @@ public class RewardsConfig {
 	
 	@Bean
 	public RestaurantRepository restaurantRepository(){
-		JdbcRestaurantRepository repository = new JdbcRestaurantRepository(dataSource);
+		JdbcRestaurantRepository repository = new JdbcRestaurantRepository(jdbcTemplate);
 		return repository;
 	}
 	
