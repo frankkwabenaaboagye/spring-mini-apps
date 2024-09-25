@@ -100,13 +100,13 @@ execution( <pattern 1> ) && execution( <pattern 2> )
     - forced to catch certain exceptions
     - forced to close resources
 - Spring JDBC Template solves these issues
-    - we a simple statment, spring will be able to handle for us
+    - with a simple statement, spring will be able to handle for us
         - connection
         - statement execution
         - result set processsing
         - exceptions
         - release of connection
-- Note: When creating the Jdbc, we need a datasource
+- Note: When creating the Jdbc, we need a `datasource`
 - Basic Usage
     - For simple Types
     - For Generic Maps
@@ -145,7 +145,7 @@ jdbcTemplate.queryForMap(...);   // watch out for memory consumption
     // you have to use call back approach
         - RowMapper
         - ResultSetExtractor
-        - 
+        - RowCallbackHandler
 
 
 jdbcTemplate
