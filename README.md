@@ -5,7 +5,7 @@ To import into your IDE, import the parent pom `lab/pom.xml` as Maven projects o
 
 # Note
  Some Tips 
- - credit: spring docs, spring academy
+ - credit: spring docs, spring academy, spring team
 
 
 # Content
