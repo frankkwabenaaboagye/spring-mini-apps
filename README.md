@@ -291,5 +291,59 @@ public void updateBeneficiaries(Account account) {
 
     jdbcTemplate.queryForObject(sql, (rs, rowNum) -> mapRestaurant(rs)); // much better
 
+
+// another example
+
+    // consider
+    jdbcTemplate.query(
+        sql, 
+        new ResultSetExtractor<Account>() {
+			@Override
+			public Account extractData(ResultSet rs) throws SQLException, DataAccessException {
+				return mapAccount(rs);
+			}
+		}, 
+        creditCardNumber
+    );
+
+    // same as
+    jdbcTemplate.query(
+        sql, 
+        rs -> {
+            return mapAccount(rs);
+        }, 
+        creditCardNumber
+    );
+
+    // same as
+    jdbcTemplate.query(
+        sql, 
+        this::mapAccount, 
+        creditCardNumber
+    );
+
+
+// by the way; the mapAcount method is shown below
+    /*
+	private Account mapAccount(ResultSet rs) throws SQLException {
+		Account account = null;
+		while (rs.next()) {
+			if (account == null) {
+				String number = rs.getString("ACCOUNT_NUMBER");
+				String name = rs.getString("ACCOUNT_NAME");
+				account = new Account(number, name);
+				// set internal entity identifier (primary key)
+				account.setEntityId(rs.getLong("ID"));
+			}
+			account.restoreBeneficiary(mapBeneficiary(rs));
+		}
+		if (account == null) {
+			// no rows returned - throw an empty result exception
+			throw new EmptyResultDataAccessException(1);
+		}
+		return account;
+	}
+    */
+
 ```
 

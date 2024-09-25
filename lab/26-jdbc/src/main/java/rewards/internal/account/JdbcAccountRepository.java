@@ -2,8 +2,10 @@ package rewards.internal.account;
 
 import common.money.MonetaryAmount;
 import common.money.Percentage;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -49,7 +51,11 @@ public class JdbcAccountRepository implements AccountRepository {
 			"left outer join T_ACCOUNT_BENEFICIARY b " +
 			"on a.ID = b.ACCOUNT_ID " +
 			"where c.ACCOUNT_ID = a.ID and c.NUMBER = ?";
-		
+
+		return jdbcTemplate.query(sql, this::mapAccount, creditCardNumber);
+
+
+		/*
 		Account account = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -84,8 +90,8 @@ public class JdbcAccountRepository implements AccountRepository {
 				} catch (SQLException ex) {
 				}
 			}
-		}
-		return account;
+		}*/
+
 	}
 
 	// TODO-06: Refactor this method to use JdbcTemplate.
