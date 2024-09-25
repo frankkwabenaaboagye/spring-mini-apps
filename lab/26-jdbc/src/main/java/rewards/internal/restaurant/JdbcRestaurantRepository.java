@@ -2,6 +2,8 @@ package rewards.internal.restaurant;
 
 import common.money.Percentage;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import rewards.Dining;
 import rewards.internal.account.Account;
 
@@ -34,21 +36,25 @@ import java.sql.SQLException;
 //	 #2: The mapRestaurant(..) method provided in this class contains
 //	     logic, which the RowMapper may wish to use
 //
-// - Run JdbcRestaurantRepositoryTests again and verity it passes
+// - Run JdbcRestaurantRepositoryTests again and verify it passes
 
 public class JdbcRestaurantRepository implements RestaurantRepository {
 
 	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplate;
 
 	public JdbcRestaurantRepository(DataSource dataSource) {
 		this.dataSource = dataSource;
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	public Restaurant findByMerchantNumber(String merchantNumber) {
 		String sql = "select MERCHANT_NUMBER, NAME, BENEFIT_PERCENTAGE, BENEFIT_AVAILABILITY_POLICY"
 				+ " from T_RESTAURANT where MERCHANT_NUMBER = ?";
-		Restaurant restaurant = null;
 
+		Restaurant restaurant = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> mapRestaurant(rs), merchantNumber);
+
+		/*
 		try (Connection conn = dataSource.getConnection();
 			 PreparedStatement ps = conn.prepareStatement(sql) ){
 			ps.setString(1, merchantNumber);
@@ -58,6 +64,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL exception occurred finding by merchant number", e);
 		}
+		*/
 
 		return restaurant;
 	}
