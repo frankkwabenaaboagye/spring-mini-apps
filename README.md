@@ -349,9 +349,19 @@ public void updateBeneficiaries(Account account) {
 ```
 
 ## Transaction
-- We have to adhere to the ACID principles when it comes to the data access layer right?
+- We have to adhere to the ACID 
+    {Atomicity, Consistency, Isolation, Durable} 
+principles when it comes to the data access layer right?
 - When running non transactionally, there could be issues like:
     - separate connections for separate method calls
     - partial failures might be a problem too
 - we need deal with this
+    - with transactions
+        - we become very efficient, because same connection is used for each operation
+        - also operations complete as an atomic unit
+- Spring Transaction Management
+    - Declare a `PlatformTransactionManager` bean
+    - Declare the transactional methods 
+        - you can use annotations, or go the programmatic way, or even do both
+    - Add the `@EnableTransactionManagement` to a configuration class
 
