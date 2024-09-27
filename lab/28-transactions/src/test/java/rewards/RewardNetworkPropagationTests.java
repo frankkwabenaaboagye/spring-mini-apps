@@ -69,6 +69,10 @@ public class RewardNetworkPropagationTests {
 		// Rollback the transaction started by this test
 		transactionManager.rollback(status);
 
+		/*
+		the rollback removed all data from the database, including the data that was created by the rewardAccountFor(Dining) method.
+		 */
+
 		// Assert that a Reward has been saved to the database - for this to be true
 		// the RewardNetwork must run and commit its OWN transaction
 		String sql = "select SAVINGS from T_ACCOUNT_BENEFICIARY where NAME = ?";
