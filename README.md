@@ -360,8 +360,35 @@ principles when it comes to the data access layer right?
         - we become very efficient, because same connection is used for each operation
         - also operations complete as an atomic unit
 - Spring Transaction Management
-    - Declare a `PlatformTransactionManager` bean
-    - Declare the transactional methods 
-        - you can use annotations, or go the programmatic way, or even do both
-    - Add the `@EnableTransactionManagement` to a configuration class
+    1. Declare a `PlatformTransactionManager` bean
+        - note that there are several implementations availbel
+            - DataSourceTM, JmsTM, JpaTM , e.t.c.
+    2. Declare the transactional methods 
+        - you can use annotations(recommended), or go the programmatic way, or even do both
+    3. Add the `@EnableTransactionManagement` to a configuration class
 
+```java
+
+// examples
+
+	@Bean
+	public DataSource dataSource(){
+        ...
+        ...
+	}	
+
+	@Bean
+	public PlatformTransactionManager transactionManager(){
+		return new DataSourceTransactionManager(dataSource());
+	}
+
+    //----
+
+    @Configuration
+    @EnableTransactionManagement
+    public class RewardsConfig {
+        ...
+        ...
+    }
+
+```
