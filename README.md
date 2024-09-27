@@ -14,7 +14,7 @@ To import into your IDE, import the parent pom `lab/pom.xml` as Maven projects o
 3. [Spring Container](#spring-container)
 4. [AOP](#aop)
 5. [JDBC](#jdbc)
-6. [Transaction]
+6. [Transaction](#transaction)
 
 ## Configuration
 
@@ -349,4 +349,9 @@ public void updateBeneficiaries(Account account) {
 ```
 
 ## Transaction
+- We have to adhere to the ACID principles when it comes to the data access layer right?
+- When running non transactionally, there could be issues like:
+    - separate connections for separate method calls
+    - partial failures might be a problem too
+- we need deal with this
 
