@@ -15,6 +15,7 @@ To import into your IDE, import the parent pom `lab/pom.xml` as Maven projects o
 4. [AOP](#aop)
 5. [JDBC](#jdbc)
 6. [Transaction](#transaction)
+7. [SpringBoot](#spring-boot)
 
 ## Configuration
 
@@ -392,3 +393,16 @@ principles when it comes to the data access layer right?
     }
 
 ```
+
+## Spring Boot
+In a Spring application, we typically need to:
+- Configure dependencies in the pom.xml file
+- Set up configurations in the application context
+
+However, many of these components can be predicted, so why not let Spring Boot handle them for us?
+- Spring Boot automates low-level configurations
+    - This requires it to make certain decisions (hence, it has its own opinions)
+        - Essentially, Spring Boot takes an opinionated approach to the Spring framework and third-party libraries
+        - However, we still have the ability to override these defaults.
+    - Important note:
+        - Spring Boot is not a code generator; all configurations happen at runtime.
