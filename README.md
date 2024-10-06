@@ -406,3 +406,6 @@ However, many of these components can be predicted, so why not let Spring Boot h
         - However, we still have the ability to override these defaults.
     - Important note:
         - Spring Boot is not a code generator; all configurations happen at runtime.
+
+- Spring Boot features
+    - dependency Management
