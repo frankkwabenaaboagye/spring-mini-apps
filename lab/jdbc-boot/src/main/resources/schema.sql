@@ -15,6 +15,6 @@ create table T_REWARD (ID integer identity primary key, CONFIRMATION_NUMBER varc
 create sequence S_REWARD_CONFIRMATION_NUMBER start with 1;
 create table DUAL_REWARD_CONFIRMATION_NUMBER (ZERO integer);
 insert into DUAL_REWARD_CONFIRMATION_NUMBER values (0);
-
+       
 alter table T_ACCOUNT_CREDIT_CARD add constraint FK_ACCOUNT_CREDIT_CARD foreign key (ACCOUNT_ID) references T_ACCOUNT(ID) on delete cascade;
 alter table T_ACCOUNT_BENEFICIARY add constraint FK_ACCOUNT_BENEFICIARY foreign key (ACCOUNT_ID) references T_ACCOUNT(ID) on delete cascade;
