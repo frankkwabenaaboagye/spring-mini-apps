@@ -414,3 +414,5 @@ However, many of these components can be predicted, so why not let Spring Boot h
         - `@SpringBootApplication` 
             - represents the combination of - `@EnableAutoConfiguration`, 
             `@ComponentScan`, and `@SpringBootConfiguration`
+    - packaging and runtime
+    - integration testing
