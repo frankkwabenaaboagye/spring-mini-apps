@@ -411,3 +411,6 @@ However, many of these components can be predicted, so why not let Spring Boot h
     - dependency Management
         - `pom` file  and starter dependencies
     - auto configuration
+        - `@SpringBootApplication` 
+            - represents the combination of - `@EnableAutoConfiguration`, 
+            `@ComponentScan`, and `@SpringBootConfiguration`
