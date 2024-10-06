@@ -416,3 +416,11 @@ However, many of these components can be predicted, so why not let Spring Boot h
             `@ComponentScan`, and `@SpringBootConfiguration`
     - packaging and runtime
     - integration testing
+
+- Getting started
+    - 3 files needed 
+        - to set up spring boot and other dependencies - `pom.xml`
+        - for general configuration - `application.properties`
+        - the application launcher - `application.class` (entry point)
+    - use : start.spring.io 
+    - or : spring-io/initializr on github
