@@ -409,3 +409,5 @@ However, many of these components can be predicted, so why not let Spring Boot h
 
 - Spring Boot features
     - dependency Management
+        - `pom` file  and starter dependencies
+    - auto configuration
