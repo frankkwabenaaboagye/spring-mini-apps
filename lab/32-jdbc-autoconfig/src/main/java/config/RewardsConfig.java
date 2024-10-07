@@ -22,11 +22,11 @@ public class RewardsConfig {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	DataSource dataSource;
-
-	// @Autowired  // This @Autowired annotation is optional here
-	public RewardsConfig() {
-	}
+//	DataSource dataSource;
+//
+//	// @Autowired  // This @Autowired annotation is optional here
+//	public RewardsConfig() {
+//	}
 
     // TODO-10 (Optional) : Switch back to explicit `DataSource` configuration
     // (Instead of using auto-configured DataSource, we are going to configure
@@ -60,19 +60,19 @@ public class RewardsConfig {
 
     @Bean
     public AccountRepository accountRepository() {
-        JdbcAccountRepository repository = new JdbcAccountRepository(dataSource);
+        JdbcAccountRepository repository = new JdbcAccountRepository(dataSource());
         return repository;
     }
 
     @Bean
     public RestaurantRepository restaurantRepository() {
-        JdbcRestaurantRepository repository = new JdbcRestaurantRepository(dataSource);
+        JdbcRestaurantRepository repository = new JdbcRestaurantRepository(dataSource());
         return repository;
     }
 
     @Bean
     public RewardRepository rewardRepository() {
-        JdbcRewardRepository repository = new JdbcRewardRepository(dataSource);
+        JdbcRewardRepository repository = new JdbcRewardRepository(dataSource());
         return repository;
     }
 
