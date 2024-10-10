@@ -431,3 +431,7 @@ However, many of these components can be predicted, so why not let Spring Boot h
     - the application launcher - `application.class` (entry point)
   - use : start.spring.io
   - or : spring-io/initializr on github
+
+- Spring Data Jpa
+  - The `Spring Data` provides a consistent programming model across different data stores
+  - It create Instant Repository
