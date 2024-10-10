@@ -27,8 +27,10 @@ public class Restaurant {
 	@Column(name = "ID")
 	private Long entityId;
 
+	@Column(name = "MERCHANT_NUMBER ")
 	private String number;
 
+	@Column(name = "NAME")
 	private String name;
 
 	// This is not a simple mapping as Percentage is not a simple type.

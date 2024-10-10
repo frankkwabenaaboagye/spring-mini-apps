@@ -1,6 +1,5 @@
 package rewards.internal.account;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.Repository;
 
 /**
@@ -24,6 +23,6 @@ public interface AccountRepository extends Repository<Account, Long> {
 	 * @return the account object
 	 */
 	// To refactor: right click on the method name -> Refactor -> Rename
-	public Account findByCreditCardNumber(String creditCardNumber);
+    Account findByCreditCardNumber(String creditCardNumber);
 
 }
