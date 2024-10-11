@@ -435,3 +435,19 @@ However, many of these components can be predicted, so why not let Spring Boot h
 - Spring Data Jpa
   - The `Spring Data` provides a consistent programming model across different data stores
   - It create Instant Repository
+
+- Web application
+  - Spring MVC
+    - lifecycle of a request
+      - *Request Lifecycle in Spring MVC*
+        - The **`Dispatcher Servlet`** is the core of Spring MVC and handles all incoming requests.
+        - However, it doesn't process them directly.
+        - It delegates the request to **`Handler Mapping`**, which identifies the appropriate controller for the request.
+        - Once the controller is identified, the Dispatcher Servlet passes the request to the **`Handler Adapter`**.
+            - The handler adapter adapts the request, passing necessary parameters (e.g., request data, URI variables) to the controller.
+            - The **`Controller`** returns a response:
+                - For server-side rendering, it returns a **`Model and View`**, where the view is a logical view.
+                - The view is resolved by the **`View Resolver`**, which locates and creates the actual view instance.
+            - Based on the model returned by the controller, the Dispatcher Servlet renders the view to the user.
+        - If the controller returns an object (like JSON or XML), the Dispatcher Servlet delegates it to **`Message Converters`**.
+            - The response from the message converters is then sent to the user.
