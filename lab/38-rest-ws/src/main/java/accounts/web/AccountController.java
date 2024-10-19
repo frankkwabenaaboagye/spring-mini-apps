@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import rewards.internal.account.Account;
 import rewards.internal.account.Beneficiary;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 
@@ -66,7 +68,8 @@ public class AccountController {
 	// TODO-06: Complete this method. Add annotations to:
 	// a. Respond to POST /accounts requests
     // b. Use a proper annotation for creating an Account object from the request
-	public ResponseEntity<Void> createAccount(Account newAccount) {
+	@PostMapping("/accounts")
+	public ResponseEntity<Void> createAccount(@RequestBody Account newAccount) {
 		// Saving the account also sets its entity Id
 		Account account = accountManager.save(newAccount);
 
@@ -90,8 +93,17 @@ public class AccountController {
 		// a. You will need to use 'ServletUriComponentsBuilder' and
 		//     'ResponseEntity' to implement this - Use ResponseEntity.created(..)
 		// b. Refer to the POST example in the slides for more information
+		URI location =  ServletUriComponentsBuilder
+				.fromCurrentRequestUri()
+				.path("/{id}")
+				.buildAndExpand(resourceId)
+				.toUri();
 
-		return null; // Return something other than null
+		return ResponseEntity
+				.created(location)
+				.build();
+
+		// return null; // Return something other than null
 	}
 
 	/**

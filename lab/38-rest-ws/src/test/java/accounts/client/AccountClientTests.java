@@ -58,7 +58,7 @@ public class AccountClientTests {
 	}
 	
 	@Test
-	@Disabled
+	// @Disabled
 	public void createAccount() {
 		// Use a unique number to avoid conflicts
 		String number = String.format("12345%4d", random.nextInt(10000));
@@ -72,12 +72,16 @@ public class AccountClientTests {
 		//  - Note that 'RestTemplate' has two methods for this.
 		//  - Use the one that returns the location of the newly created
 		//    resource and assign that to a variable.
-		URI newAccountLocation = null; // Modify this line to use the restTemplate
+//		URI newAccountLocation = null; // Modify this line to use the restTemplate
+		URI newAccountLocation = newAccountLocation = restTemplate.postForLocation(BASE_URL + "/accounts", account);
 
 		//	TODO-09: Retrieve the Account you just created from
 		//	         the location that was returned.
 		//	- Run this test, then. Make sure the test succeeds.
-		Account retrievedAccount = null; // Modify this line to use the restTemplate
+//		Account retrievedAccount = null; // Modify this line to use the restTemplate
+        assertNotNull(newAccountLocation);
+        Account retrievedAccount = restTemplate.getForObject(newAccountLocation, Account.class);
+		assertNotNull(retrievedAccount);
 		
 		assertEquals(account.getNumber(), retrievedAccount.getNumber());
 		
