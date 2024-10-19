@@ -1,7 +1,6 @@
 package accounts.client;
 
 import common.money.Percentage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
@@ -91,9 +90,10 @@ public class AccountClientTests {
 		assertEquals(accountBeneficiary.getName(), retrievedAccountBeneficiary.getName());
 		assertNotNull(retrievedAccount.getEntityId());
 	}
-	
+
+
 	@Test
-	@Disabled
+	// @Disabled
 	public void addAndDeleteBeneficiary() {
 		// perform both add and delete to avoid issues with side effects
 		
@@ -102,14 +102,20 @@ public class AccountClientTests {
 		// - Create a new Beneficiary called "David" for the account with id 1
 		//	 (POST the String "David" to the "/accounts/{accountId}/beneficiaries" URL).
 		// - Store the returned location URI in a variable.
-		
+
+		String addUrl = BASE_URL + "/accounts/{accountId}/beneficiaries";
+		URI newBeneficiaryLocation = restTemplate.postForLocation(addUrl, "David", 1);
+        assert newBeneficiaryLocation != null;
+
+
 		// TODO-14: Retrieve the Beneficiary you just created from the location that was returned
-		Beneficiary newBeneficiary = null; // Modify this line to use the restTemplate
-		
-		assertNotNull(newBeneficiary);
-		assertEquals("David", newBeneficiary.getName());
+        Beneficiary newBeneficiary = restTemplate.getForObject(newBeneficiaryLocation, Beneficiary.class);
+//		Beneficiary newBeneficiary = null; // Modify this line to use the restTemplate
+
 		
 		// TODO-15: Delete the newly created Beneficiary
+		//restTemplate.delete(location);
+		restTemplate.delete(newBeneficiaryLocation);
 
 
 		HttpClientErrorException httpClientErrorException = assertThrows(HttpClientErrorException.class, () -> {
@@ -119,6 +125,8 @@ public class AccountClientTests {
 			// - Run this test, then. It should pass because we expect a 404 Not Found
 			//   If not, it is likely your delete in the previous step
 			//   was not successful.
+			//restTemplate.getForObject(location, Beneficiary.class);
+			restTemplate.getForObject(newBeneficiaryLocation, Beneficiary.class);
 
 		});
 		assertEquals(HttpStatus.NOT_FOUND, httpClientErrorException.getStatusCode());
