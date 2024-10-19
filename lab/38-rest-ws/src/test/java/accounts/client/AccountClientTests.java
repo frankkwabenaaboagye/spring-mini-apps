@@ -22,7 +22,7 @@ public class AccountClientTests {
 	private Random random = new Random();
 	
 	@Test
-	@Disabled
+	// @Disabled
 	public void listAccounts() {
 		// TODO-03: Run this test
 		// - Remove the @Disabled on this test method.
@@ -30,6 +30,8 @@ public class AccountClientTests {
 		// - Use BASE_URL to help define the URL you need: BASE_URL + "/..."
 		// - Run the test and ensure that it passes.
 		Account[] accounts = null; // Modify this line to use the restTemplate
+
+		accounts = restTemplate.getForObject(BASE_URL + "/accounts", Account[].class);
 		
 		assertNotNull(accounts);
 		assertTrue(accounts.length >= 21);
