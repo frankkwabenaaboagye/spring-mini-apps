@@ -41,7 +41,7 @@ public class AccountController {
     // b. Return a List<Account> to be converted to the response body
 	// - Access http://localhost:8080/accounts using a browser or curl
 	//   and verify that you see the list of accounts in JSON format.
-	@GetMapping(value = "/accounts")
+	@GetMapping(value = "/accounts") // working
 	public List<Account> accountSummary() {
 		return accountManager.getAllAccounts();
 	}
