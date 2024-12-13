@@ -19,6 +19,7 @@ public class AccountClientTests {
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	private Random random = new Random();
+
 	
 	@Test
 	// @Disabled
