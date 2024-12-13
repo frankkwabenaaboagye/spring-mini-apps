@@ -458,6 +458,8 @@ However, many of these components can be predicted, so why not let Spring Boot h
 
 ## Spring Boot Testing
   - `@SpringBootTest` registers a TestRestTemplate bean.
+  - `TestRestTemplate` is, by design, fault tolerant. 
+    - This means that it does not throw exceptions when an error response (400 or greater) is received.
 
 ## Securing REST Application with Spring Security
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import rewards.internal.account.Account;
@@ -14,6 +15,7 @@ import rewards.internal.account.Beneficiary;
 import java.net.URI;
 import java.util.Random;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -96,6 +98,7 @@ public class AccountClientTests {
 	}
 
 
+	/*
 	@Test
 	// @Disabled
 	public void addAndDeleteBeneficiary() {
@@ -135,5 +138,22 @@ public class AccountClientTests {
 		});
 		assertEquals(HttpStatus.NOT_FOUND, httpClientErrorException.getStatusCode());
 	}
-	
+
+	 */
+
+	@Test
+	public void addAndDeleteBeneficiary() {
+		// perform both add and delete to avoid issues with side effects
+		String addUrl = "/accounts/{accountId}/beneficiaries";
+		URI newBeneficiaryLocation = restTemplate.postForLocation(addUrl, "David", 1);
+		Beneficiary newBeneficiary = restTemplate.getForObject(newBeneficiaryLocation, Beneficiary.class);
+		assertThat(newBeneficiary.getName()).isEqualTo("David");
+
+		restTemplate.delete(newBeneficiaryLocation);
+
+		ResponseEntity<Beneficiary> response =
+				restTemplate.getForEntity(newBeneficiaryLocation, Beneficiary.class);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+	}
+
 }
