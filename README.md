@@ -17,6 +17,9 @@ Some Tips
 5. [JDBC](#jdbc)
 6. [Transaction](#transaction)
 7. [SpringBoot](#spring-boot)
+8. [SpringBoot Testing](#spring-boot-testing)
+9. [Securing REST Application with Spring Security](#securing-rest-application-with-spring-security)
+10. [Actuator](#actuator)
 
 ## Configuration
 
@@ -451,3 +454,10 @@ However, many of these components can be predicted, so why not let Spring Boot h
             - Based on the model returned by the controller, the Dispatcher Servlet renders the view to the user.
         - If the controller returns an object (like JSON or XML), the Dispatcher Servlet delegates it to **`Message Converters`**.
             - The response from the message converters is then sent to the user.
+
+
+## Spring Boot Testing
+
+## Securing REST Application with Spring Security
+
+## Actuator
