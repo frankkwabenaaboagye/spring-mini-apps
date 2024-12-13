@@ -460,6 +460,42 @@ However, many of these components can be predicted, so why not let Spring Boot h
   - `@SpringBootTest` registers a TestRestTemplate bean.
   - `TestRestTemplate` is, by design, fault tolerant. 
     - This means that it does not throw exceptions when an error response (400 or greater) is received.
+  - To test Spring MVC Controllers, you can use `@WebMvcTest`. 
+    - It auto-configures the Spring MVC infrastructure (and nothing else) for the web slice tests.
+  - Note that the Web slice testing runs faster than an integration testing since it does not need to start a server.
+
+```java
+
+BDDMockito: given(..), willReturn(..), willThrow(..)
+MockMvc: perform(..)
+ResultActions: andExpect(..)
+MockMvcRequestBuilders: get(..), post(..), put(..), delete(..)
+MockMvcResultMatchers: status(), content(), jsonPath(..), header()
+
+```
+
+  - Note that `@WebMvcTest` auto-configures MockMvc bean.
+
+```java
+
+// example
+	@Test
+	public void accountDetails() throws Exception {
+
+		given(accountManager.getAccount(0L))
+				.willReturn(new Account("1234567890", "John Doe"));
+
+		mockMvc.perform(get("/accounts/0"))
+			   .andExpect(status().isOk())
+			   .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+			   .andExpect(jsonPath("name").value("John Doe"))
+			   .andExpect(jsonPath("number").value("1234567890"));
+
+		verify(accountManager).getAccount(0L);
+
+	}
+
+```
 
 ## Securing REST Application with Spring Security
 
