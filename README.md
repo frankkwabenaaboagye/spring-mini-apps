@@ -457,6 +457,7 @@ However, many of these components can be predicted, so why not let Spring Boot h
 
 
 ## Spring Boot Testing
+  - `@SpringBootTest` registers a TestRestTemplate bean.
 
 ## Securing REST Application with Spring Security
 

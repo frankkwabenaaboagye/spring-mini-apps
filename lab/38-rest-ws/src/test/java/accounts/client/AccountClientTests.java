@@ -2,6 +2,9 @@ package accounts.client;
 
 import common.money.Percentage;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -13,14 +16,14 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AccountClientTests {
 
-	private static final String BASE_URL = "http://localhost:8080";
-	
-	private RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	private TestRestTemplate restTemplate;
 	private Random random = new Random();
 
-	
+
 	@Test
 	// @Disabled
 	public void listAccounts() {
@@ -31,7 +34,7 @@ public class AccountClientTests {
 		// - Run the test and ensure that it passes.
 		Account[] accounts = null; // Modify this line to use the restTemplate
 
-		accounts = restTemplate.getForObject(BASE_URL + "/accounts", Account[].class);
+		accounts = restTemplate.getForObject("/accounts", Account[].class);
 		
 		assertNotNull(accounts);
 		assertTrue(accounts.length >= 21);
@@ -49,7 +52,7 @@ public class AccountClientTests {
 		// - Run the test and ensure that it passes.
 		Account account = null; // Modify this line to use the restTemplate
 
-		account = restTemplate.getForObject(BASE_URL + "/accounts/0", Account.class);
+		account = restTemplate.getForObject("/accounts/0", Account.class);
 		
 		assertNotNull(account);
 		assertEquals("Keith and Keri Donald", account.getName());
@@ -73,7 +76,7 @@ public class AccountClientTests {
 		//  - Use the one that returns the location of the newly created
 		//    resource and assign that to a variable.
 //		URI newAccountLocation = null; // Modify this line to use the restTemplate
-		URI newAccountLocation = newAccountLocation = restTemplate.postForLocation(BASE_URL + "/accounts", account);
+		URI newAccountLocation = newAccountLocation = restTemplate.postForLocation("/accounts", account);
 
 		//	TODO-09: Retrieve the Account you just created from
 		//	         the location that was returned.
@@ -104,7 +107,7 @@ public class AccountClientTests {
 		//	 (POST the String "David" to the "/accounts/{accountId}/beneficiaries" URL).
 		// - Store the returned location URI in a variable.
 
-		String addUrl = BASE_URL + "/accounts/{accountId}/beneficiaries";
+		String addUrl = "/accounts/{accountId}/beneficiaries";
 		URI newBeneficiaryLocation = restTemplate.postForLocation(addUrl, "David", 1);
         assert newBeneficiaryLocation != null;
 
