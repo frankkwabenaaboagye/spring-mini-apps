@@ -25,6 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 // TODO-07: Replace @ExtendWith(SpringExtension.class) with the following annotation
@@ -102,6 +103,14 @@ public class AccountControllerBootTests {
 		//   object into Json string)
 		// - Verify that the response status is 201
 		// - Verify that the response "Location" header contains "http://localhost/accounts/21"
+
+
+		mockMvc.perform(post("/accounts")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(asJsonString(testAccount)))
+				.andExpect(status().isCreated())
+				.andExpect(header().string("Location", "http://localhost/accounts/21"));
+
 
 		verify(accountManager).save(any(Account.class));
 
