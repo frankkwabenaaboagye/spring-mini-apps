@@ -88,11 +88,11 @@ public class AccountControllerBootTests {
 	@Test
 	public void createAccount() throws Exception {
 
-		//Account testAccount = new Account("1234512345", "Mary Jones");
-		//testAccount.setEntityId(21L);
+		Account testAccount = new Account("1234512345", "Mary Jones");
+		testAccount.setEntityId(21L);
 
-		//given(accountManager.save(any(Account.class)))
-		//		.willReturn(testAccount);
+		given(accountManager.save(any(Account.class)))
+				.willReturn(testAccount);
 
 		// (Write code here)
 		// Use mockMvc to perform HTTP Post operation to "/accounts"
@@ -103,7 +103,7 @@ public class AccountControllerBootTests {
 		// - Verify that the response status is 201
 		// - Verify that the response "Location" header contains "http://localhost/accounts/21"
 
-		//verify(accountManager).save(any(Account.class));
+		verify(accountManager).save(any(Account.class));
 
 	}
 
